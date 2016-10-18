@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="http://www.google.com 동해물과 백두산이 마르고 닳도록 하나님이 보우하사 우리나라 만세."
+        android:autoLink="web"
+        android:lines="1"/>
+
+    <!--
+        EditText 출력 시 기본 한줄 입력으로 나오다가 유저가 키보드에서
+        엔터키를 치면 아래로 늘어나서 여러줄 입력화면...
+        lines : 초기부터 몇 줄 입력 사이즈로 나와라.. 더 이상 밑으로 늘어나지
+                않는다.. 키보드로는 여러줄 입력 가능하고..
+    -->
+    <EditText
+        android:id="@+id/edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lines="3"
+        android:gravity="center"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/image_resource"
+        android:clickable="true"/>
+    <Button
+        android:id="@+id/btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="click me"/>
+
+</LinearLayout>

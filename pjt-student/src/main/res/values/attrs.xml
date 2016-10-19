@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+        CustomView에 들어가는 개발자 속성
+        기본으로 되지 않고 허용하려면 꼭 선언하고 사용
+    -->
+    <declare-styleable name="AAA">
+        <attr name="customColor" format="color"/>
+    </declare-styleable>
+</resources>

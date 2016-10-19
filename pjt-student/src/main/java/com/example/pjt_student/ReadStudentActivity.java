@@ -1,5 +1,7 @@
 package com.example.pjt_student;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
@@ -15,6 +17,8 @@ public class ReadStudentActivity extends AppCompatActivity {
 
     TabHost host;
 
+    int student_id = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +33,22 @@ public class ReadStudentActivity extends AppCompatActivity {
         nameView = (TextView)findViewById(R.id.read_name);
         phoneView = (TextView)findViewById(R.id.read_phone);
         emailView = (TextView)findViewById(R.id.read_email);
+
+        DBHelper dbHelper = new DBHelper(this);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        // select괸 row의 집합객체 (like resultSet)
+        // cursor를 움직여서 row 하나를 선택하고 선택된 row의 column data 추출
+        Cursor cursor = db.rawQuery("select * from tb_student where _id = " + student_id, null);
+        cursor.moveToFirst();
+
+        nameView.setText(cursor.getString(1));
+        emailView.setText(cursor.getString(2));
+        phoneView.setText(cursor.getString(3));
+
+        String photo = cursor.getString (4);
+
+        db.close();
     }
 
     private void initTab() {

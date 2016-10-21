@@ -1,12 +1,18 @@
 package com.example.pjt_student;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -70,6 +76,66 @@ public class MainListAdapter extends ArrayAdapter<StudentVO> {
 
         nameView.setText(vo.name);
         scoreView.setText(String.valueOf(vo.score));
+
+        // 유저 프사가 있으면 그 이미지로 출력하고 없으면 기본 이미지 출력
+        // 우리의 이미지는 유저 카메라로 찍은 이미지이고 사이즈가 너무 크다
+        // 화면에 출력하려면 메모리에 올리며 이때 OutOfMemory 문제가 발생한다.
+        // 이미지 데이터 사이즈 자체를 줄여서 로딩
+        if(vo.photo != null && !vo.photo.equals("")) {
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inSampleSize = 10;
+            Bitmap bitmap = BitmapFactory.decodeFile(vo.photo);
+            if (bitmap != null) {
+                studentImageView.setImageBitmap(bitmap);
+            }
+        }else{
+            studentImageView.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_student_small));
+        }
+
+        // 프사 클릭 이벤트 => dialog
+        studentImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // custom dialog를 위한 layout xml 초기화
+                LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                View root = inflater.inflate(R.layout.dialog_student_image, null);
+                ImageView dialogImage = (ImageView) root.findViewById(R.id.dialog_image);
+
+                // 유저 프사가 있으면 그 이미지로 출력하고 없으면 기본 이미지 출력
+                // 우리의 이미지는 유저 카메라로 찍은 이미지이고 사이즈가 너무 크다
+                // 화면에 출력하려면 메모리에 올리며 이때 OutOfMemory 문제가 발생한다.
+                // 이미지 데이터 사이즈 자체를 줄여서 로딩
+                if(vo.photo != null && !vo.photo.equals("")) {
+                    BitmapFactory.Options options = new BitmapFactory.Options();
+                    options.inSampleSize = 10;
+                    Bitmap bitmap = BitmapFactory.decodeFile(vo.photo);
+                    if (bitmap != null) {
+                        dialogImage.setImageBitmap(bitmap);
+                    }
+                }else{
+                    dialogImage.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_student_large));
+                }
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setView(root);
+                builder.create().show();
+            }
+        });
+
+        contactView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(vo.phone != null && !"".equals(vo.phone)){
+                    // CallApp 연동으로 전화
+                    Intent intent = new Intent();
+                    intent.setAction(Intent.ACTION_CALL);
+                    intent.setData(Uri.parse("tel:" + vo.phone));
+                    context.startActivity(intent);
+                }else{
+                    Toast.makeText(context, R.string.main_list_phone_error, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
         return convertView;
     }

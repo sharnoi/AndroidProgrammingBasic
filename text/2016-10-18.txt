@@ -1,0 +1,41 @@
+#### Android UI Architecture ####
+		View
+	  /	     \
+ViewGroup   TextView
+	|
+ Layout
+
+* ViewGroup
+ - 출력 대상(O)
+ - 자체 UI(X)
+ - 다른 View 객체 여러개를 자신에게 Add시켜 한꺼번에 제어
+ 
+* Activity -> Button
+ - Pattern : Composite Pattern
+ - Model : Document Object Model
+ => Like 윈도우 탐색기(Folder & File)
+ 
+ 
+#### View 속성 ####
+* id : 동적 변경이 있을 때 View를 활용하기 위함
+* layout_width/layout_height : 필수 속성(없으면 Compile 에러)
+ - wrap-content
+ - fill_parent == match_parent
+* clickable : TextView, ImageView만 false로 잡혀있음. 기본은 true
+* focusable : touchable 핸드폰에서 무쓸모
+* gravity : View에서 Contents의 정렬
+* layout_gravity : Parent에서 View의 정렬
+* layout_weight : 여백을 비율에 맞춰 할당
+
+
+#### id : @android ####
+library에서 findViewById 함수가 내재되어 사용되는 경우 사용해야함
+
+#### SQLite ####
+* open Source DB (www.sqlite.org)
+* 경량 DB (Embedded Device)
+* 표준 RDBMS 준수 (표준 sql)
+* PK는 Table당 한 Column
+* DataType을 지원하지 않음
+* connection이 없다 -> File DB
+* transaction : 간단한 부분만 존재

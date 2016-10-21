@@ -1,0 +1,45 @@
+Android - Java => GO Lang.
+iOS - Objective C
+    - Swift
+	
+	
+#### Android App 개발 특징 ####
+1. Component 기반 개발
+ - CBD 방법론(Component Based Dev.)
+ - Application의 구성 요소
+ - App 내에서 독립적 수행단위 - Class간 직접적인 수행이 발생하지 않는다(?)
+   . App의 수행시점의 다양화(main function 개념 X)\
+   . Appliction Library
+ - Class == Component but VO와 Util성 class는 제외
+ - Class의 Runtime시 Lifecycle을 Android System이 관리하면 Component
+   1) Activity 			- UI출력
+   2) Service			- Backgroud 작업
+   3) ContentProvider	- App간 Data Share
+   4) BroadCastReceiver	- Event Model(System의 특정 상태-System Event)로 수행
+ ※ 위 4개의 Component를 상속받아 개발 진행
+
+2. Resource 외부화, 극대화
+ - 문자열/이미지/Color/Size/Layout/menu/App설정/Animation 등 모든 Static한 요소
+
+
+#### 모바일 개발 전 준비사항 ####
+업무설계 -> 화면설계 => Component 설계
+
+#### Android 개발 File, Directory 구조 ####
+Module / src / A.java ........
+         assets / resource 대상이 아닌 나머지 file
+		 res / drawable / 이미지
+		       layout / UI xml
+			   values / 문자열
+		 (res 하위 폴더 존재 X, 파일명에 대문자 X
+		  resource 대상은 정적 byte 데이터, xml)
+	     AndroidManifest.xml -> 메인환경파일
+		 
+R.java
+ - R == Resource
+ 
+ 
+#### App 배포(Install 파일 만들기) ####
+1. key 준비
+
+2. app sign해서 apk 추출

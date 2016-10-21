@@ -1,0 +1,17 @@
+#### AdapterView ####
+* (항목나열) Adapter에 의해서 완성되는 View
+ - ListView, Spinner, AutoCompleteTextView, ...
+ - 항목나열이라는 것은 Activity 입장에서는 모두 같은 동작이고
+   이를 각각의 Activity와 View사이에 Adapter를 두고 동일하게 구현한다.
+* Activity -> Adapter
+ - 항목 하나를 구성하기 위한 layout xml 정보
+ - layout 초기화는 Adapter가 수행
+* Android에서 제공하는 Adapter
+ - ArrayAdapter : 한 항목에 문자열 data 순서대로 1개씩 나열
+ - SimpleAdapter : 한 항목에 문자열 data 순서대로 n개씩 나열(ArrayAdapter를 포함)
+ - CursorAdapter : dbms
+ 
+ 
+#### AdapterView 성능이슈 ####
+1. layout 초기화
+2. findViewById

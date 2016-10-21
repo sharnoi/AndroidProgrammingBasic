@@ -1,0 +1,40 @@
+#### Code에서 layout xml 동적 변경 ####
+* 기본적인 속성은 set함수 존재
+* 속성의 종류
+ 1. 일반속성
+  - 'layout_'가 없는 속성
+  - set함수가 존재
+  - View 자체만의 속성
+ 2. layout속성
+  - 'layout_'가 붙은 속성
+  - set함수가 미존재
+  - 화면의 다른 View 요소들과 관련이 있는 속성
+  
+#### layout code에서 직접 초기화 ####
+* 부분적인 layout을 xml에 선언하고 초기화만 하는 경우 존재
+ - ListView, Dialog
+* LayoutInflator를 이용하여 Java에서 layout 초기화 수행
+
+#### 하위호환 방법 ####
+* Support Lib 사용
+ - Google에서 제공하는 하위호환성 및 Utility가 포함되어있는 Lib.
+ - SDK Manager로 download
+ - V4, V7, V13등이 있으며 버전은 minSdkVersion을 의미한다
+ - V7이 V4를 포함하는게 아니며 V4에 없는 추가기능을 Support하는게 V7이다
+ - dependency 연결하고 사용 - Gradle
+* Open Source Lib
+* Code에서 API_LEVEL을 획득하여 작성
+
+#### Permission ####
+* App간 Manifest에 permission을 지정하고 사용하는 쪽에서 user-permission을 통해 활용
+
+#### User Event Model ####
+1. Hierarchy Event Model : 원론적 Event 처리
+ - touch/key Event를 직접 처리
+ - Activity에 onTouchEvent(), onKeyDown(), onKeyUp()을 override하여 사용
+2. delecation Event Model : oop적 재해석 처리
+ - View에 거는 Event
+ - 어느 View? Event의 종류는?? => oop의 명료성 추구
+ - EventSource : Event 발생 객체
+ - EventHandler : Event 처리 내용 객체
+ - EventSource와 EventHandler는 Listener로 반드시 연결

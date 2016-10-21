@@ -1,0 +1,30 @@
+private void initAddScore() {
+        btn0 = (Button) findViewById(R.id.key_0);
+        btn1 = (Button) findViewById(R.id.key_1);
+        btn2 = (Button) findViewById(R.id.key_2);
+        btn3 = (Button) findViewById(R.id.key_3);
+        btn4 = (Button) findViewById(R.id.key_4);
+        btn5 = (Button) findViewById(R.id.key_5);
+        btn6 = (Button) findViewById(R.id.key_6);
+        btn7 = (Button) findViewById(R.id.key_7);
+        btn8 = (Button) findViewById(R.id.key_8);
+        btn9 = (Button) findViewById(R.id.key_9);
+        btnBack = (Button) findViewById(R.id.key_back);
+        btnAdd = (Button) findViewById(R.id.key_add);
+
+        addScoreView = (TextView) findViewById(R.id.key_edit);
+
+        btn0.setOnClickListener(addScoreListener);
+        btn1.setOnClickListener(addScoreListener);
+        btn2.setOnClickListener(addScoreListener);
+        btn3.setOnClickListener(addScoreListener);
+        btn4.setOnClickListener(addScoreListener);
+        btn5.setOnClickListener(addScoreListener);
+        btn6.setOnClickListener(addScoreListener);
+        btn7.setOnClickListener(addScoreListener);
+        btn8.setOnClickListener(addScoreListener);
+        btn9.setOnClickListener(addScoreListener);
+        btnBack.setOnClickListener(addScoreListener);
+        btnAdd.setOnClickListener(addScoreListener);
+
+    }

@@ -24,6 +24,7 @@ public class DBHelper extends SQLiteOpenHelper {
                                 "name not null," +
                                 "email," +
                                 "phone," +
+                                "photo," +
                                 "memo)";
         String scoreSql = "create table tb_score (" +
                             "_id integer primary key autoincrement," +

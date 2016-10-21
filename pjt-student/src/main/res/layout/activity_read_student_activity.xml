@@ -85,17 +85,15 @@
                 android:layout_height="0dp"
                 android:layout_weight="1">
 
-                <TextView
+                <ListView
                     android:id="@+id/read_score_list"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="score list"/>
+                    android:layout_height="match_parent"/>
 
-                <TextView
+                <WebView
                     android:id="@+id/read_score_chart"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="score chart"/>
+                    android:layout_height="match_parent"/>
 
                 <include
                     android:id="@+id/read_score_add"
@@ -103,11 +101,32 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"/>
 
-                <TextView
+                <ScrollView
                     android:id="@+id/read_memo"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="memo"/>
+                    android:layout_height="match_parent">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/spanView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="[위 아래 위 위 아래 위 아래 위 위 아래 위 아래 위 위 아래 UP~ 위 아래 위 위 아래 위 아래 위 위 아래 위 아래 위 위 아래 DOWN~ 난 몰라. 순진한 척 하는 네 동공 날 네 맘대로...] \n 음악적 능력과 비쥬얼을 동시에 갖춰 걸그룹의 새로운 대안으로 평가받고 있는 EXID(이엑스아이디)가 ‘위아래’ 를 발매하며 새로운 시작을 알렸다. ‘위아래’ 는 EXID가 예당엔터테인먼트와 계약 한 후 처음 발매하는 곡으로 재정비된 EXID의 새로운 모습을 만날 수 있는 곡이기도 하다. 방향성을 다시 정하며 힘든 시간을 보냈을 멤버들이 ‘위아래’ 로 새롭게 정의된 EXID의 색깔을 보며 멤버들이 느낄 감회도 무척 새로울 작품이다. - more"
+                            android:bufferType="spannable"
+                            android:linksClickable="true"/>
+
+
+                        <TextView
+                            android:id="@+id/htmlView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"/>
+
+
+                    </LinearLayout>
+                </ScrollView>
             </FrameLayout>
 
             <TabWidget

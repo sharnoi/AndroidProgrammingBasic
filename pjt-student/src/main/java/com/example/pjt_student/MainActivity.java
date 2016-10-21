@@ -1,6 +1,8 @@
 package com.example.pjt_student;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -10,33 +12,61 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
-    Button testBtn;
+import java.util.ArrayList;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener{
     ImageView addBtn;
+    ListView listView;
+    ArrayList<StudentVO> datas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        testBtn = (Button)findViewById(R.id.main_test_btn);
         addBtn = (ImageView)findViewById(R.id.main_btn);
+        listView = (ListView) findViewById(R.id.main_list);
 
-        testBtn.setOnClickListener(this);
         addBtn.setOnClickListener(this);
+        listView.setOnItemClickListener(this);
+
+        DBHelper helper = new DBHelper(this);
+        SQLiteDatabase db = helper.getWritableDatabase();
+        Cursor cursor = db.rawQuery("select * from tb_student order by name", null);
+
+        datas = new ArrayList<>();
+        while(cursor.moveToNext()){
+            StudentVO vo = new StudentVO();
+            vo.id = cursor.getInt(0);
+            vo.name = cursor.getString(1);
+            vo.email = cursor.getString(2);
+            vo.phone = cursor.getString(3);
+            vo.photo = cursor.getString(4);
+            vo.memo = cursor.getString(5);
+
+            Cursor cursor1 = db.rawQuery("select score from tb_score where student_id = ? order by date desc limit 1",
+                    new String[]{String.valueOf(vo.id)});
+            while(cursor1.moveToNext()){
+                vo.score = cursor1.getInt(0);
+            }
+            datas.add(vo);
+        }
+
+        db.close();
+
+        MainListAdapter adapter = new MainListAdapter(this, R.layout.main_list_item, datas);
+        listView.setAdapter(adapter);
     }
 
     @Override
     public void onClick(View v) {
         if(v == addBtn){
             Intent intent = new Intent(this, AddStudentActivity.class);
-            startActivity(intent);
-        }else if(v == testBtn){
-            Intent intent = new Intent(this, ReadStudentActivity.class);
             startActivity(intent);
         }
     }
@@ -95,4 +125,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             return false;
         }
     };
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Intent intent = new Intent(this, ReadStudentActivity.class);
+        startActivity(intent);
+    }
 }
